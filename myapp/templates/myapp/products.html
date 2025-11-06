@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <script src="{% static 'js/filter.js' %}" defer></script>
+</head>
+
+<body>
+
+    <h1 class="title">Our Products</h1>
+
+    <div class="category-buttons">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="gadgets">Gadgets</button>
+        <button class="filter-btn" data-category="clothing">Clothing</button>
+    </div>
+
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card" data-category="{{ product.category }}">
+            <div class="img-box">
+                <img src="{% static product.image %}" alt="{{ product.name }}">
+                {% if product.sale %}
+                <span class="sale-tag">SALE</span>
+                {% endif %}
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p class="price">₹{{ product.price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
